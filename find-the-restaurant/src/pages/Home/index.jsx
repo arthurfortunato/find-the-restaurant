@@ -1,5 +1,8 @@
-import { Container } from "./styles";
+import { Container, Search } from "./styles";
 
-const Home = () => <Container>Inciando a Landing page</Container>
+const Home = () =>
+    <Container>
+        <Search />
+    </Container>
 
 export default Home;
