@@ -8,8 +8,9 @@ export const Container = styled.aside`
 `;
 
 export const Search = styled.section`
-    display; flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #fff;
+    background-color: #ffffff;
+    padding: 16px;
 `;
