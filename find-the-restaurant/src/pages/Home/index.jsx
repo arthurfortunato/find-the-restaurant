@@ -4,7 +4,7 @@ import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
 import logo from '../../assets/logo.svg';
-import { Card, RestaurantCard, Modal } from '../../components'
+import { Card, RestaurantCard, Modal, Map } from '../../components'
 
 import { Wrapper, Container, Search, Logo, CarouselTitle, Carousel } from "./styles";
 
@@ -46,6 +46,7 @@ const Home = () => {
                 </Search>
                 <RestaurantCard />
             </Container>
+            <Map />
             <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}/>
         </Wrapper>
     );
