@@ -1,21 +1,20 @@
 import { Restaurant, RestaurantInfo, Title, Address, RestaurantPhoto } from '../RestaurantCard/styles'
 import ReactStars from 'react-rating-stars-component';
 
-import logo from '../../assets/logo.svg'
-
-const RestaurantCard = () => 
-    <Restaurant>
+const RestaurantCard = ({ restaurant, onClick }) => (
+    <Restaurant onClick={onClick}>
         <RestaurantInfo>
-            <Title>Nome do Restaurante</Title>
+            <Title>{restaurant.name}</Title>
             <ReactStars 
                 count={5} 
-                isHalf={true}
-                value={4}
+                isHalf
+                value={restaurant.rating}
                 edit={false}
                 activeColor='#e7711c' />
-            <Address>Endereço</Address>
+            <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
         </RestaurantInfo>
-        <RestaurantPhoto src={logo} alt="foto do restaurante"/>
+        <RestaurantPhoto src={restaurant.photos[0].getUrl()} alt="foto do restaurante"/>
     </Restaurant>
+);
 
 export default RestaurantCard;
