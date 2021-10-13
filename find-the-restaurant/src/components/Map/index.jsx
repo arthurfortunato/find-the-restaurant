@@ -1,6 +1,8 @@
-import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
-import { useDispatch, useSelector } from 'react-redux';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-use-before-define */
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
 import { setRestaurants, setRestaurant } from '../../redux/modules/restaurants';
 
@@ -12,15 +14,15 @@ export const MapContainer = (props) => {
 
     useEffect(() => {
         if (query) {
-            searchByQuery(query);
+          searchByQuery(query);
         }
-    }, [query]);
+      }, [query]);
 
-    useEffect(() => {
+      useEffect(() => {
         if (placeId) {
-            getRestaurantById(placeId);
+          getRestaurantById(placeId);
         }
-    }, [placeId]);
+      }, [placeId]);
 
     function getRestaurantById(placeId) {
         const service = new google.maps.places.PlacesService(map);
@@ -31,7 +33,7 @@ export const MapContainer = (props) => {
             fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
         };
 
-        service.textSearch(request, (place, status) => {
+        service.getDetails(request, (place, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 dispatch(setRestaurant(place));
             }
@@ -40,7 +42,7 @@ export const MapContainer = (props) => {
 
     function searchByQuery(query) {
         const service = new google.maps.places.PlacesService(map);
-        dispatch(setRestaurant([]));
+        dispatch(setRestaurants([]));
 
         const request = {
             location: map.center,
@@ -68,7 +70,6 @@ export const MapContainer = (props) => {
 
         service.nearbySearch(request, (results, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log('restaurants>>>', results);
                 dispatch(setRestaurants(results));
             }
         });
@@ -86,13 +87,16 @@ export const MapContainer = (props) => {
             onReady={onMapReady}
             onRecenter={onMapReady}
             {...props}>
-             {restaurants.map((restaurant) => (
-                 <Marker key={restaurant.place_id} name={restaurant.name} position ={{
-                     lat: restaurant.geometry.location.lat(),
-                     lng: restaurant.geometry.location.lng()
-                 }}/>
-
-             ))}   
+            {restaurants.map((restaurant) => (
+                <Marker
+                    key={restaurant.place_id}
+                    name={restaurant.name}
+                    position={{
+                        lat: restaurant.geometry.location.lat(),
+                        lng: restaurant.geometry.location.lng(),
+                    }}
+                />
+            ))}
         </Map>
     );
 };
@@ -101,4 +105,3 @@ export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     language: 'pt-BR',
 })(MapContainer);
-

@@ -6,13 +6,13 @@ import MaterialIcon from '@material/react-material-icon';
 
 import logo from '../../assets/logo.svg';
 
-import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../components'
+import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../components';
 
 import { Wrapper, Container, Search, Logo, CarouselTitle, Carousel, ModalTitle, ModalContent, TextSearch } from './styles';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState(null);
     const [placeId, setPlaceId] = useState(null);
     const [modalOpened, setModalOpened] = useState(false);
     const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
@@ -27,16 +27,16 @@ const Home = () => {
         adaptiveHeight: true,
     };
 
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            setQuery(inputValue);
-        }
+ function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      setQuery(inputValue);
     }
+  }
 
-    function handleOpenModal() {
-        setPlaceId(placeId);
-        setModalOpened(true);
-    }
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOpened(true);
+  }
 
     return (
         <Wrapper>
@@ -69,6 +69,8 @@ const Home = () => {
                 </Search>
                 {restaurants.map((restaurant) =>
                     <RestaurantCard onClick={() => handleOpenModal(restaurant.place_id)} restaurant={restaurant} />)}
+            </Container>
+            <Map query={query} placeId={placeId} />
             <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
                 {restaurantSelected ? (
                     <>
@@ -76,8 +78,8 @@ const Home = () => {
                     <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
                     <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
                     <ModalContent>{restaurantSelected?.opening_hours?.open_now 
-                        ? 'Aberto Agora :-)'
-                        : 'Fechado neste momento :-('}
+                        ? 'Aberto Agora :)'
+                        : 'Fechado neste momento :('}
                     </ModalContent>
                     </>
                 ): (
@@ -89,8 +91,6 @@ const Home = () => {
                     </>
                 )}
             </Modal>
-            </Container>
-            <Map query={query} placeId={placeId} />
         </Wrapper>
     );
 };

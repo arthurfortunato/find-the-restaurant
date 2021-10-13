@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Restaurant, RestaurantInfo, Title, Address, RestaurantPhoto } from '../RestaurantCard/styles'
+import { Restaurant, RestaurantInfo, Title, Address, RestaurantPhoto } from '../RestaurantCard/styles';
 import ReactStars from 'react-rating-stars-component';
 import Skeleton from '../Skeleton';
 
