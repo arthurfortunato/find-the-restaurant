@@ -8,7 +8,7 @@
 
 ## 💻 Projeto Restaurant Finder
 
-Projeto desenvolvido na plataforma do **[Digital Innovation](https://digitalinnovation.one/)**, realizado sobre a mentoria do professor Patrick Narciso.
+Projeto desenvolvido na plataforma da **[Digital Innovation](https://digitalinnovation.one/)**, realizado sobre a mentoria do professor Patrick Narciso.
 
 <p>Tem o Objetivo de buscar restaurantes próximos utilizando o  Google Maps API.</p>
 
