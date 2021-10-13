@@ -43,5 +43,5 @@ export const RestaurantPhoto = styled.img`
     heigth: 100px;
     object-fit: cover;
     border-radius: 6px;
-
+    display: ${({ imageLoaded }) => (imageLoaded ? 'block' : 'none')};
 `;

@@ -5,13 +5,14 @@ import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
 import logo from '../../assets/logo.svg';
-import { Card, RestaurantCard, Modal, Map, Loader } from '../../components'
 
-import { Wrapper, Container, Search, Logo, CarouselTitle, Carousel, ModalTitle, ModalContent, TextSearch } from "./styles";
+import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../components'
+
+import { Wrapper, Container, Search, Logo, CarouselTitle, Carousel, ModalTitle, ModalContent, TextSearch } from './styles';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
-    const [query, setQuery] = useState(null);
+    const [query, setQuery] = useState('');
     const [placeId, setPlaceId] = useState(null);
     const [modalOpened, setModalOpened] = useState(false);
     const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
@@ -68,14 +69,28 @@ const Home = () => {
                 </Search>
                 {restaurants.map((restaurant) =>
                     <RestaurantCard onClick={() => handleOpenModal(restaurant.place_id)} restaurant={restaurant} />)}
+            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
+                {restaurantSelected ? (
+                    <>
+                    <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+                    <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+                    <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
+                    <ModalContent>{restaurantSelected?.opening_hours?.open_now 
+                        ? 'Aberto Agora :-)'
+                        : 'Fechado neste momento :-('}
+                    </ModalContent>
+                    </>
+                ): (
+                    <>
+                    <Skeleton width="10px" height="10px"/>
+                    <Skeleton width="10px" height="10px"/>
+                    <Skeleton width="10px" height="10px"/>
+                    <Skeleton width="10px" height="10px"/>
+                    </>
+                )}
+            </Modal>
             </Container>
             <Map query={query} placeId={placeId} />
-            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-                <ModalTitle>{restaurantSelected?.name}</ModalTitle>
-                <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
-                <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
-                <ModalContent>{restaurantSelected?.opening_hours?.open_now ? 'Aberto Agora :-)' : 'Fechado neste momento :-('}</ModalContent>
-            </Modal>
         </Wrapper>
     );
 };

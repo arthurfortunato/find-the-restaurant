@@ -1,8 +1,8 @@
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
-import { setRestaurants, setRestaurant } from "../../redux/modules/restaurants";
+import { setRestaurants, setRestaurant } from '../../redux/modules/restaurants';
 
 export const MapContainer = (props) => {
     const dispatch = useDispatch();

@@ -1,9 +1,9 @@
-import Lottie from "react-lottie";
+import React from 'react';
+import Lottie from 'react-lottie';
 
 import animationData from '../../assets/loading.json';
 
-
-const gifLottie = () => {
+const loading = () => {
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -13,7 +13,7 @@ const gifLottie = () => {
         },
     };
 
-    return <Lottie options={defaultOptions} />
-}
+    return <Lottie options={defaultOptions} />;
+};
 
-export default gifLottie;
+export default loading;

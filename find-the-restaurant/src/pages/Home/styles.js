@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import Slider from 'react-slick';
 
 export const Wrapper = styled.div`
@@ -18,7 +17,7 @@ export const Search = styled.section`
     flex-direction: column;
     justify-content: center;
     background-color: #ffffff;
-    padding: 16px;
+    padding: 20px;
 `;
 
 export const Logo = styled.img`
